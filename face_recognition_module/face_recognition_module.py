@@ -1,11 +1,12 @@
 import face_recognition
 import picamera
 import numpy as np
-import json
 
-# Load encodings
-with open('encodings.json', 'r') as file:
-    base_encodings = json.load(file)
+# Load encodings. allow_pickle=True is a security flaw, but is not relevant.
+source = 'source/encodings.npy'
+base_encodings = np.load(source, allow_pickle=True).item()
+
+print(base_encodings)
 
 # Get a reference to the Raspberry Pi camera.
 # If this fails, make sure you have a camera connected to the RPi and that you
