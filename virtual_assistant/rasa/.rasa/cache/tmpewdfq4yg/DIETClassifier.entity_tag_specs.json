@@ -1,0 +1,20 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-residence",
+      "2": "I-residence",
+      "3": "L-residence",
+      "4": "U-residence",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-residence": 1,
+      "I-residence": 2,
+      "L-residence": 3,
+      "U-residence": 4,
+      "O": 0
+    },
+    "num_tags": 5
+  }
+]

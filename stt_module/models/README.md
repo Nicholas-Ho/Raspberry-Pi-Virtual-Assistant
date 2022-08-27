@@ -1,1 +1,0 @@
-Note: Models should be placed in 'home/.cache/vosk' or 'usr/share/vosk'

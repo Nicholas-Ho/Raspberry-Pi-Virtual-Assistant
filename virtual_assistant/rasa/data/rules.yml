@@ -1,0 +1,33 @@
+version: "3.1"
+
+rules:
+
+- rule: Say hello anytime the user says hello
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Reassure anytime the user apologises
+  steps:
+  - intent: apologise
+  - action: utter_reassurance
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: Remember where the user lives
+  steps:
+  - intent: inform_residence
+  - action: action_remember_residence
+
+- rule: Say where the user lives (if the available)
+  steps:
+  - intent: ask_residence
+  - action: action_utter_residence

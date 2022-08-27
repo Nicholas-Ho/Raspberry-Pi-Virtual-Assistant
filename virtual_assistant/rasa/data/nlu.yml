@@ -1,0 +1,88 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: apologise
+  examples: |
+    - sorry about that
+    - i apologise
+    - i apologize
+    - so sorry!
+    - it's my fault
+    - my mistake
+    - it's my mistake
+
+- intent: ask_joke
+  examples: |
+    - tell me a joke!
+    - say something funny
+    - give me a good joke
+    - joke?
+    - humor me
+    - humour me
+
+- intent: inform_residence
+  examples: |
+    - we are in [Cambridge](residence)
+    - I live in [Singapore](residence)
+    - my house is at [London](residence)
+
+- intent: ask_residence
+  examples: |
+    - where do I live?
+    - where are we now
+    - what place is this
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?

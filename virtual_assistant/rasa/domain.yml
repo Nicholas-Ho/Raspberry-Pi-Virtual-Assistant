@@ -1,0 +1,56 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - apologise
+  - ask_joke
+  - inform_residence
+  - ask_residence
+  - bot_challenge
+
+entities:
+  - residence
+
+slots:
+  residence:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: residence
+
+responses:
+  utter_greet:
+  - text: "Hello! How can I help?"
+  - text: "Hello there. How can I help you today?"
+
+  utter_default:
+  - text: "Sorry, I didn't quite get that."
+  - text: "Sorry, I didn't understand that."
+
+  utter_goodbye:
+  - text: "Goodbye!"
+
+  utter_reassurance:
+  - text: "No worries!"
+  - text: "No problem at all."
+
+  utter_joke:
+  - text: "Who is Brue Lee's faster brother? Sudden Lee!"
+  - text: "When I visited Australia, the immigration officer asked if I had a criminal record. I replied 'Oh, are those still required?'"
+  - text: "What's the best thing about Switzerland? I'm not too sure, but their flag is a big plus!"
+
+  utter_iamabot:
+  - text: "I am indeed a bot."
+  - text: "I am a bot, but you don't have to rub it in..."
+
+actions:
+- action_utter_residence
+- action_remember_residence
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
