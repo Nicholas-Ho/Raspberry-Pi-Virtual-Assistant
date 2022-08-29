@@ -6,13 +6,15 @@ intents:
   - affirm
   - deny
   - apologise
+  - thank
   - ask_joke
   - inform_residence
   - ask_residence
+  - ask_weather
   - bot_challenge
 
 entities:
-  - residence
+  - place
 
 slots:
   residence:
@@ -20,7 +22,8 @@ slots:
     influence_conversation: false
     mappings:
     - type: from_entity
-      entity: residence
+      entity: place
+      role: residence
 
 responses:
   utter_greet:
@@ -38,6 +41,11 @@ responses:
   - text: "No worries!"
   - text: "No problem at all."
 
+  utter_thanks_response:
+  - text: "You're welcome!"
+  - text: "No problem!"
+  - text: "No worries! Glad I could help."
+
   utter_joke:
   - text: "Who is Brue Lee's faster brother? Sudden Lee!"
   - text: "When I visited Australia, the immigration officer asked if I had a criminal record. I replied 'Oh, are those still required?'"
@@ -50,6 +58,7 @@ responses:
 actions:
 - action_utter_residence
 - action_remember_residence
+- action_get_weather
 
 session_config:
   session_expiration_time: 60

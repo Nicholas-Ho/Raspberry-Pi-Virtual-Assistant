@@ -59,6 +59,17 @@ nlu:
     - my mistake
     - it's my mistake
 
+- intent: thank
+  examples: |
+    - thank you!
+    - thanks so much!
+    - I am indebted to you
+    - I appreciate it
+    - I'm really grateful
+    - much obliged
+    - please accept my gratitude
+    - great! thanks!
+
 - intent: ask_joke
   examples: |
     - tell me a joke!
@@ -70,15 +81,24 @@ nlu:
 
 - intent: inform_residence
   examples: |
-    - we are in [Cambridge](residence)
-    - I live in [Singapore](residence)
-    - my house is at [London](residence)
+    - we are in [Cambridge]{"entity": "place", "role": "residence"}
+    - I live in [Singapore]{"entity": "place", "role": "residence"}
+    - my house is at [London]{"entity": "place", "role": "residence"}
 
 - intent: ask_residence
   examples: |
     - where do I live?
     - where are we now
     - what place is this
+
+- intent: ask_weather
+  examples: |
+    - what is the weather?
+    - is it raining now?
+    - what's the weather like in [New York](place)
+    - will it be sunny later in [Beijing](place)
+    - will it rain?
+    - what is the weather forecast?
 
 - intent: bot_challenge
   examples: |
