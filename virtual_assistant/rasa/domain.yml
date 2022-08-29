@@ -14,7 +14,7 @@ intents:
   - bot_challenge
 
 entities:
-  - place
+  - city
 
 slots:
   residence:
@@ -22,7 +22,7 @@ slots:
     influence_conversation: false
     mappings:
     - type: from_entity
-      entity: place
+      entity: city
       role: residence
 
 responses:

@@ -92,6 +92,13 @@ class WeatherModule:
                 data = f.read()
                 j = json.loads (data.decode('utf-8'))
                 self.cities_df = pd.DataFrame(j).drop(['id', 'state', 'coord'], axis=1)
+
+        with open('cities.txt', 'w') as f:
+            s = ''
+            for city in self.cities_df['name'].values:
+                s += city
+                s += '\n'
+            s = s[:-2]
         
         if city in self.cities_df['name'].values:
             return True
@@ -100,5 +107,5 @@ class WeatherModule:
 
 if __name__ == "__main__":
     mod = WeatherModule()
-    print(mod.check_city('cambridge'))
-    print(mod.get_simple_forecast(city='cambridge', country_code='GBR'))
+    print(mod.check_city('cairo'))
+    print(mod.get_simple_forecast(city='cairo', country_code='EGY'))
