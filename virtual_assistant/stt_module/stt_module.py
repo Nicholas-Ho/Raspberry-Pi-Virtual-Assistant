@@ -38,7 +38,7 @@ class STTModule():
             return rec.PartialResult()[17:-3]
 
 
-    def listen(self, wait_length=None, break_after=False):
+    def listen(self, wait_length=None, break_after=True, headless=True):
         '''
         Listens for a set duration (number of loop cycles), then prints the output when activated.
 
@@ -48,9 +48,10 @@ class STTModule():
         try:
             with sd.RawInputStream(samplerate=self.samplerate, blocksize = 8000, device=self.device, dtype='int16',
                                     channels=1, callback=self.callback):
-                    print('#' * 80)
-                    print('Press Ctrl+C to stop the recording')
-                    print('#' * 80)
+                    if not headless:
+                        print('#' * 80)
+                        print('Press Ctrl+C to stop the recording')
+                        print('#' * 80)
 
                     rec = vosk.KaldiRecognizer(self.model, self.samplerate)
 
@@ -75,7 +76,6 @@ class STTModule():
                                 if wait_length != None : wait_length -= 1
                             else:
                                 # If the user has finished speaking
-                                print(prev_result)
                                 listen = False
                                 if break_after : break
                         else:
@@ -84,15 +84,19 @@ class STTModule():
                         if wait_length != None:
                             if wait_length <= 0 and break_after: break
 
-                    print('\nDone')
+                    if not headless: print(prev_result)
+                    return prev_result
 
         except KeyboardInterrupt:
-            print('\nDone')
+            if headless:
+                raise
+            else:
+                print('\nDone')
         except Exception as e:
             print(e)
 
 
-    def listen_hotword(self, hotwords=['hello'], break_after=False):
+    def listen_hotword(self, hotwords=['hello'], break_after=True, headless=True):
         '''
         Listens indefinitely for a set of hotwords, then prints the output when activated.
 
@@ -102,9 +106,10 @@ class STTModule():
         try:
             with sd.RawInputStream(samplerate=self.samplerate, blocksize = 8000, device=self.device, dtype='int16',
                                     channels=1, callback=self.callback):
-                    print('#' * 80)
-                    print('Press Ctrl+C to stop the recording')
-                    print('#' * 80)
+                    if not headless:
+                        print('#' * 80)
+                        print('Press Ctrl+C to stop the recording')
+                        print('#' * 80)
 
                     rec = vosk.KaldiRecognizer(self.model, self.samplerate)
 
@@ -129,12 +134,17 @@ class STTModule():
                                 listen = True
                         
                         if result == '' and listen:
-                            print(prev_result)
                             listen = False
                             if break_after : break
 
+                    if not headless: print(prev_result)
+                    return prev_result
+
         except KeyboardInterrupt:
-            print('\nDone')
+            if headless:
+                raise
+            else:
+                print('\nDone')
         except Exception as e:
             print(e)
 
@@ -142,5 +152,5 @@ class STTModule():
 # Testing
 if __name__ == '__main__':
     stt = STTModule()
-    stt.listen_hotword(['hello diana', 'hey diana'], True)
-    #stt.listen(10)
+    stt.listen_hotword(['hello diana', 'hey diana'], True, False)
+    # stt.listen(10, True, False)

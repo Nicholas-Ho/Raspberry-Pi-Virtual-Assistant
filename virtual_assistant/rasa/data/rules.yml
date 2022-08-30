@@ -26,6 +26,11 @@ rules:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+  
+- rule: For testing whether Rasa is running
+  steps:
+  - intent: testing
+  - action: utter_test_response
 
 - rule: Remember where the user lives
   steps:
