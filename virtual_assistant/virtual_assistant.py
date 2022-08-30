@@ -8,7 +8,7 @@
 
 import requests
 from stt_module.stt_module import STTModule
-#from tts_module.tts_module import TTSModule
+from tts_module.tts_module import TTSModule
 
 class VirtualAssistant():
 
@@ -20,7 +20,7 @@ class VirtualAssistant():
 
 	def __init__(self):
 		self.stt_mod = STTModule()
-		#self.tts_mod = TTSModule()
+		self.tts_mod = TTSModule()
 
 		# Test if Rasa is running on port 5002
 		sender = 'test'
@@ -46,12 +46,15 @@ class VirtualAssistant():
 		try:
 			while True:
 				msg = self.stt_mod.listen_hotword(hotwords=self.hotwords, break_after=True, headless=True)
+				print(msg)
 				output = self.send_message(msg)
-				print(output)
+				for sentence in output:
+					print(sentence)
+					self.tts_mod.speak(sentence)
 		except KeyboardInterrupt:
 			print('\nDone')
-		except Exception as e:
-			print(e)
+		# except Exception as e:
+		# 	print(e)
 
 if __name__ == '__main__':
 	assistant = VirtualAssistant()

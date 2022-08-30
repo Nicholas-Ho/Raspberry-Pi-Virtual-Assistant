@@ -100,7 +100,7 @@ class TTSModule:
 
 # Testing
 
-# if __name__ == "__main__":
-#     tts = TTSModule()
-#     text = 'Hello Nicholas. Hope you have a nice day!'
-#     tts.speak(text)
+if __name__ == "__main__":
+    tts = TTSModule()
+    text = 'Hello Nicholas. Hope you have a nice day!'
+    tts.speak(text)

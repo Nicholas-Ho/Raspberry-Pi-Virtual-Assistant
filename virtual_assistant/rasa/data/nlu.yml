@@ -118,3 +118,4 @@ nlu:
 - intent: testing
   examples: |
     - testing
+    - testing, 1, 2, 3
