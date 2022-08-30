@@ -81,12 +81,15 @@ nlu:
 
 - intent: inform_residence
   examples: |
-    - we are in [Cambridge]{"entity": "city", "role": "residence"}
-    - I live in [Singapore]{"entity": "city", "role": "residence"}
-    - my house is at [London]{"entity": "city", "role": "residence"}
-    - my hometown is [Cairo]{"entity": "city", "role": "residence"}
-    - we are in [Lisbon]{"entity": "city", "role": "residence"}
-    - I live in [Beijing]{"entity": "city", "role": "residence"}
+    - we are in [Cambridge]{"entity": "GPE", "role": "residence"}
+    - I live in [Singapore]{"entity": "GPE", "role": "residence"}
+    - my house is at [London]{"entity": "GPE", "role": "residence"}
+    - my hometown is [Cairo]{"entity": "GPE", "role": "residence"}
+    - we are in [Lisbon]{"entity": "GPE", "role": "residence"}
+    - I live in [Beijing]{"entity": "GPE", "role": "residence"}
+    - I'm from [New York]{"entity": "GPE", "role": "residence"}
+    - my home is [Bath]{"entity": "GPE", "role": "residence"}
+    - I'm from [Shenzhen]{"entity": "GPE", "role": "residence"}
 
 - intent: ask_residence
   examples: |
@@ -98,12 +101,12 @@ nlu:
   examples: |
     - what is the weather?
     - is it raining now?
-    - what's the weather like in [New York](city)
-    - will it be sunny later in [Beijing](city)
+    - what's the weather like in [New York](GPE)
+    - will it be sunny later in [Beijing](GPE)
     - will it rain?
     - what is the weather forecast?
-    - what's the temperature in [Lisbon](city)?
-    - is it going to snow in [Cairo](city)?
+    - what's the temperature in [Lisbon](GPE)?
+    - is it going to snow in [Cairo](GPE)?
 
 - intent: bot_challenge
   examples: |

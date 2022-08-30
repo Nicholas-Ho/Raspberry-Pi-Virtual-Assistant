@@ -44,11 +44,8 @@ class ActionRememberResidence(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         residence = next(tracker.get_latest_entity_values(
-            entity_type="city",
-            entity_role="residence"
+            entity_type="GPE"
         ), None)
-
-        dispatcher.utter_message(residence)
         
         if not residence:
             msg = "I didn't get where you lived. Are you sure it's spelled correctly?"
@@ -57,7 +54,7 @@ class ActionRememberResidence(Action):
         
         mod = WeatherModule()
         if not mod.check_city(residence):
-            msg = f"I didn't recognise {residence}. Are you sure it's spelled correctly?"
+            msg = f"I didn't recognise {residence}. Are you sure it's a city?"
             dispatcher.utter_message(text=msg)
             return []
         

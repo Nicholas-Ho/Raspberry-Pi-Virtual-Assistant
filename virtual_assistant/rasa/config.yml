@@ -10,7 +10,11 @@ pipeline:
 # # No configuration for the NLU pipeline was provided. The following default pipeline was used to train your model.
 # # If you'd like to customize it, uncomment and adjust the pipeline.
 # # See https://rasa.com/docs/rasa/tuning-your-model for more information.
-  - name: WhitespaceTokenizer
+  - name: "SpacyNLP"
+    model: "en_core_web_md"
+  - name: SpacyTokenizer
+  - name: SpacyFeaturizer
+    pooling: mean
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer
@@ -18,6 +22,8 @@ pipeline:
     analyzer: char_wb
     min_ngram: 1
     max_ngram: 4
+  - name: SpacyEntityExtractor
+    dimensions: ["GPE"]
   - name: DIETClassifier
     epochs: 100
     constrain_similarities: true
@@ -25,14 +31,9 @@ pipeline:
   - name: ResponseSelector
     epochs: 100
     constrain_similarities: true
-  - name: FallbackClassifier
-    threshold: 0.3
-    ambiguity_threshold: 0.1
-  - name: RegexEntityExtractor
-    case_sensitive: false
-    use_lookup_tables: true
-    use_regexes: true
-    use_word_boundaries: true
+  # - name: FallbackClassifier
+  #   threshold: 0.3
+  #   ambiguity_threshold: 0.1
 
 # Configuration for Rasa Core.
 # https://rasa.com/docs/rasa/core/policies/

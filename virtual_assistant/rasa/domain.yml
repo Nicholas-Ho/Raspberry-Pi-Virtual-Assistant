@@ -14,7 +14,11 @@ intents:
   - bot_challenge
 
 entities:
-  - city
+  # Entities tailored with NER labels for SpacyEntityExtractor
+  # GPE used for city detection
+  - GPE
+  # PERSON used for name detection
+  - PERSON
 
 slots:
   residence:
@@ -22,8 +26,14 @@ slots:
     influence_conversation: false
     mappings:
     - type: from_entity
-      entity: city
+      entity: GPE
       role: residence
+  name:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: PERSON
 
 responses:
   utter_greet:
