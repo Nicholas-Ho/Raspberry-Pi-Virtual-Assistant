@@ -107,6 +107,32 @@ nlu:
     - what is the weather forecast?
     - what's the temperature in [Lisbon](GPE)?
     - is it going to snow in [Cairo](GPE)?
+    - tell me the weather
+
+- intent: ask_news
+  examples: |
+    - tell me the news
+    - give me the news
+    - what has happened in the world today?
+    - give me the breakdown of today's happenings
+    - what's happened today?
+    - what are the headlines for today?
+    - give me the morning brief
+    - what's going on in the world?
+    - give me a [business](news_category) briefing
+    - tell me some [technology](news_category) news
+    - give me [sports](news_category) news
+    - what's going on in the [entertainment](news_category) industry?
+
+- lookup: news_category
+  examples: |
+    - general
+    - business
+    - technology
+    - sports
+    - entertainment
+    - health
+    - science
 
 - intent: bot_challenge
   examples: |

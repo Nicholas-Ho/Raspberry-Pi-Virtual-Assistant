@@ -11,10 +11,12 @@ intents:
   - inform_residence
   - ask_residence
   - ask_weather
+  - ask_news
   - bot_challenge
   - testing
 
 entities:
+  - news_category
   # Entities tailored with NER labels for SpacyEntityExtractor
   # GPE used for city detection
   - GPE
@@ -22,7 +24,7 @@ entities:
   - PERSON
 
 slots:
-  residence:
+  residence_city:
     type: text
     influence_conversation: false
     mappings:
@@ -35,6 +37,19 @@ slots:
     mappings:
     - type: from_entity
       entity: PERSON
+  residence_country:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: GPE
+  news_category:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: news_category
+
 
 responses:
   utter_greet:
@@ -73,6 +88,7 @@ actions:
 - action_utter_residence
 - action_remember_residence
 - action_get_weather
+- action_get_news
 
 session_config:
   session_expiration_time: 60

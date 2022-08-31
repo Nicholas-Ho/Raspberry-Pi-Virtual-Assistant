@@ -5,7 +5,7 @@ import sounddevice as sd
 import vosk
 import sys
 
-class STTModule():
+class STTModule:
 
     model = vosk.Model(lang="en-us")
 

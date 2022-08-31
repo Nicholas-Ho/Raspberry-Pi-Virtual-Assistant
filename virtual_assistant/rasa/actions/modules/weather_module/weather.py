@@ -1,8 +1,17 @@
 import requests
 from datetime import datetime, timedelta
-import os, gzip, json
+import os, sys, gzip, json
 
 import pandas as pd
+
+DIR_PATH = os.path.dirname(os.path.abspath(__file__))
+
+# Handling of relative import
+if __name__ == "__main__":
+    sys.path.append(os.path.dirname(DIR_PATH))
+    from secrets.keys import OPENWEATHERAPI_KEY
+else:
+    from .secrets.keys import OPENWEATHERAPI_KEY
 
 # Weather module using the OpenWeatherMap API
 
@@ -12,7 +21,7 @@ class WeatherModule:
     owm_forecast_url = 'https://api.openweathermap.org/data/2.5/forecast?'
 
     # API key
-    api_key = '68b6d057e9098222566561fb9f10b372'
+    api_key = OPENWEATHERAPI_KEY
 
     cities_df = None
 
@@ -26,8 +35,8 @@ class WeatherModule:
         else:
             return False
 
-    def query_weather_forecast(self, city, country_code, units='metric'):
-        url = self.owm_forecast_url + f'q={city},{country_code}&appid={self.api_key}&units={units}'
+    def query_weather_forecast(self, city, units='metric'):
+        url = self.owm_forecast_url + f'q={city}&appid={self.api_key}&units={units}'
         response = requests.get(url)
         data = response.json()
 
@@ -37,8 +46,8 @@ class WeatherModule:
             return None
 
     # Query forecasts by day. day=0 is today, day=1 is tomorrow and so on.
-    def query_day_forecast(self, day, city, country_code, units='metric'):
-        data = self.query_weather_forecast(city, country_code, units)
+    def query_day_forecast(self, day, city, units='metric'):
+        data = self.query_weather_forecast(city, units)
         today = datetime.now().date()
         day = today + timedelta(days=day)
 
@@ -53,8 +62,8 @@ class WeatherModule:
             return None
 
     # Returns simplified forecast
-    def get_simple_forecast(self, day=0, city='cambridge', country_code='GBR', units='metric'):
-        forecasts = self.query_day_forecast(day, city, country_code, units)
+    def get_simple_forecast(self, day=0, city='cambridge', units='metric'):
+        forecasts = self.query_day_forecast(day, city, units)
 
         if not forecasts:
             return None
@@ -83,10 +92,9 @@ class WeatherModule:
         city = city.title()
 
         # Lazy getter
-        if not self.cities_df:
+        if self.cities_df is None:
             # Ensuring that the absolute path is correct (for calling from elsewhere)
-            dir_path = os.path.dirname(os.path.realpath(__file__))
-            path = os.path.join(dir_path, 'city.list.json.gz')
+            path = os.path.join(DIR_PATH, 'city.list.json.gz')
 
             with gzip.open(path, "r") as f:
                 data = f.read()
@@ -98,7 +106,27 @@ class WeatherModule:
         else:
             return False
 
+    # Get the country's ISO Alpha-2 code from the city
+    def get_country_iso_2_from_city(self, city):
+        city = city.title()
+
+        # Lazy getter
+        if self.cities_df is None:
+            # Ensuring that the absolute path is correct (for calling from elsewhere)
+            path = os.path.join(DIR_PATH, 'city.list.json.gz')
+
+            with gzip.open(path, "r") as f:
+                data = f.read()
+                j = json.loads (data.decode('utf-8'))
+                self.cities_df = pd.DataFrame(j).drop(['id', 'state', 'coord'], axis=1)
+
+        if self.check_city(city):
+            return self.cities_df[self.cities_df['name']==city]['country'].values[0]
+        else:
+            return None
+
 if __name__ == "__main__":
     mod = WeatherModule()
     print(mod.check_city('cairo'))
-    print(mod.get_simple_forecast(city='cairo', country_code='EGY'))
+    print(mod.get_simple_forecast(city='cairo'))
+    print(mod.get_country_iso_2_from_city('london'))

@@ -24,6 +24,11 @@ pipeline:
     max_ngram: 4
   - name: SpacyEntityExtractor
     dimensions: ["GPE"]
+  - name: RegexEntityExtractor
+    case_sensitive: false
+    use_lookup_tables: true
+    use_regexes: true
+    use_word_boundaries: true
   - name: DIETClassifier
     epochs: 100
     constrain_similarities: true
@@ -31,9 +36,9 @@ pipeline:
   - name: ResponseSelector
     epochs: 100
     constrain_similarities: true
-  # - name: FallbackClassifier
-  #   threshold: 0.3
-  #   ambiguity_threshold: 0.1
+  - name: FallbackClassifier
+    threshold: 0.3
+    ambiguity_threshold: 0.1
 
 # Configuration for Rasa Core.
 # https://rasa.com/docs/rasa/core/policies/
