@@ -1,7 +1,8 @@
 # Set up the following shells in order:
 
-# 1. In /rasa, run the actions server using 'rasa run actions --port 5055'
-# 2. In /rasa, run the rasa server using 'rasa run -m models --endpoints endpoints.yml --port 5002 --credentials credentials.yml'
+# 1. In /rasa/actions/modules/spotify_module/node_web_player, enter WSL, activate node.js via nvm then run 'node .' (see spotify.py for details)
+# 2. In /rasa, run the actions server using 'rasa run actions --port 5055'
+# 3. In /rasa, run the rasa server using 'rasa run -m models --endpoints endpoints.yml --port 5002 --credentials credentials.yml'
 
 # Then run the virtual_assistant.py script (in yet another shell).
 

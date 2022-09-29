@@ -13,8 +13,11 @@ from rasa_sdk.events import SlotSet
 
 from .modules.weather_module.weather import WeatherModule
 from .modules.news_module.news import NewsModule
+from .modules.spotify_module.python.spotify import SpotifyModule
 # from .modules.utils import convert_iso_2_to_country
 
+# Initialise the Spotify Module
+spotify_module = SpotifyModule()
 
 class ActionUtterResidence(Action):
 
@@ -116,7 +119,6 @@ class ActionGetNews(Action):
 
         # Check if the user gave a news category. If not, default to 'general'.
         category = next(tracker.get_latest_entity_values("news_category"), None)
-        if not category: category = None
         
         # Checking
         mod = NewsModule()
@@ -135,6 +137,62 @@ class ActionGetNews(Action):
         for headline in headlines:
             dispatcher.utter_message(headline)
         msg = "That's it with the news for now!"
+        dispatcher.utter_message(text=msg)
+        
+        return []
+
+class ActionPlayMusic(Action):
+
+    def name(self) -> Text:
+        return "action_play_music"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        msg = "Playing music!"
+        dispatcher.utter_message(text=msg)
+
+        spotify_module.play()
+        
+        return []
+
+class ActionPauseMusic(Action):
+
+    def name(self) -> Text:
+        return "action_pause_music"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        msg = "Pausing music!"
+        dispatcher.utter_message(text=msg)
+
+        spotify_module.pause()
+        
+        return []
+
+class ActionPlaySong(Action):
+
+    def name(self) -> Text:
+        return "action_play_song"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # Get song (and artist if available)
+        song = next(tracker.get_latest_entity_values("song"), None)
+        artist = next(tracker.get_latest_entity_values("music_artist"), None)
+
+        if song:
+            msg = f"Playing {song}"
+            if artist: msg += f" by {artist}"
+
+            spotify_module.play_song(song, artist)
+        else:
+            msg = "No song provided!"
         dispatcher.utter_message(text=msg)
         
         return []

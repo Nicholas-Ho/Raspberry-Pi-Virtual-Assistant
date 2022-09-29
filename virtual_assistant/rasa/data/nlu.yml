@@ -134,6 +134,32 @@ nlu:
     - health
     - science
 
+- intent: play_music
+  examples: |
+    - play some music
+    - play me a song
+    - play some tunes!
+    - put on some music
+    - start up the jukebox
+    - turn on spotify
+    - can you play some music?
+    - could you turn on the music?
+
+- intent: pause_music
+  examples: |
+    - pause the music
+    - stop playing
+    - stop the music
+    - shut up
+    - turn off the jukebox
+    - turn off spotify
+    - turn off the music
+    - stop playing the song
+    - stop playing the music
+    - pause it
+    - can you pause the music please?
+    - could you stop playing?
+
 - intent: bot_challenge
   examples: |
     - are you a bot?

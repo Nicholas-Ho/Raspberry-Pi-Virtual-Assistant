@@ -51,3 +51,18 @@ rules:
   steps:
   - intent: ask_news
   - action: action_get_news
+
+- rule: Play music
+  steps:
+  - intent: play_music
+  - action: action_play_music
+
+- rule: Pause music
+  steps:
+  - intent: pause_music
+  - action: action_pause_music
+
+- rule: Play song
+  steps:
+  - intent: play_song
+  - action: action_play_song

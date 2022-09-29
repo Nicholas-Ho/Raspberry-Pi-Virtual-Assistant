@@ -3,3 +3,6 @@
 **/cache
 **__pycache__/
 **/secrets
+.env
+
+**/node_modules

@@ -6,7 +6,7 @@ DIR_PATH = os.path.dirname(os.path.abspath(__file__))
 
 # Handling of relative import
 if __name__ == "__main__":
-    sys.path.append(os.path.dirname(DIR_PATH))
+    sys.path.append(DIR_PATH)
     from secrets.keys import NEWS_API_KEY
 else:
     from .secrets.keys import NEWS_API_KEY

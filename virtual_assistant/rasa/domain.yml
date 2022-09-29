@@ -12,11 +12,16 @@ intents:
   - ask_residence
   - ask_weather
   - ask_news
+  - play_music
+  - pause_music
+  - play_song
   - bot_challenge
   - testing
 
 entities:
   - news_category
+  - song
+  - music_artist
   # Entities tailored with NER labels for SpacyEntityExtractor
   # GPE used for city detection
   - GPE
@@ -43,12 +48,12 @@ slots:
     mappings:
     - type: from_entity
       entity: GPE
-  news_category:
-    type: text
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: news_category
+  # news_category:
+  #   type: text
+  #   influence_conversation: false
+  #   mappings:
+  #   - type: from_entity
+  #     entity: news_category
 
 
 responses:
@@ -89,6 +94,9 @@ actions:
 - action_remember_residence
 - action_get_weather
 - action_get_news
+- action_play_music
+- action_pause_music
+- action_play_song
 
 session_config:
   session_expiration_time: 60
