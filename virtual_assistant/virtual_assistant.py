@@ -13,14 +13,14 @@ from tts_module.tts_module import TTSModule
 
 class VirtualAssistant:
 
-	# Conda environment containing rasa installation
-	CONDA_ENV = 'raspberry-pi'
-
 	# Virtual assistant hotwords ('Hey google'?)
-	hotwords = ['hello diana', 'hey diana']
+	hotwords = ['hello diana', 'hey diana', 'hi diana']
+
+	# Thank you phrases (to end listening session)
+	thank_you_phrases = ['thank you', 'thanks so much', 'thank you so much']
 
 	# Wait length for listening session
-	wait_length = 50
+	wait_length = 25
 
 	def __init__(self):
 		self.stt_mod = STTModule()
@@ -74,6 +74,8 @@ class VirtualAssistant:
 				for sentence in output:
 					print(sentence)
 					self.tts_mod.speak(sentence)
+				if msg in self.thank_you_phrases:
+					break
 			else:
 				break
 

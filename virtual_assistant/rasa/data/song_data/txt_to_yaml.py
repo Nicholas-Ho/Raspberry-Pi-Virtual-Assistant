@@ -1,4 +1,6 @@
-import re, random
+import random
+
+length = 50
 
 templates = [
     "could you play [SONG_HERE](song) by [ARTIST_HERE](music_artist)",
@@ -31,6 +33,10 @@ with open('songs.txt', 'r', encoding='utf-8') as f:
         song, artist = line.strip().split(';', 1)
         entry = random.choice(templates).replace('SONG_HERE', song).replace('ARTIST_HERE', artist)
         text += '    - ' + entry + '\n'
+
+        length -= 1
+        if length <= 0:
+            break
 
 with open('song_data.yml', 'w', encoding='utf-8') as f:
     f.write(text)

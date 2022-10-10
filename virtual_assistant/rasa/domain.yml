@@ -81,6 +81,11 @@ responses:
   - text: "Who is Brue Lee's faster brother? Sudden Lee!"
   - text: "When I visited Australia, the immigration officer asked if I had a criminal record. I replied 'Oh, are those still required?'"
   - text: "What's the best thing about Switzerland? I'm not too sure, but their flag is a big plus!"
+  - text: "Man goes to doctor. Says he's depressed. Says life seems harsh and cruel. Says he feels all alone in a threatening world where what lies ahead is vague and uncertain. Doctor says, 'Treatment is simple. Great clown Pagliacci is in town tonight. Go and see him. That should pick you up.' Man bursts into tears. Says, 'But doctor…I am Pagliacci.'"
+  - text: "To the person who stole my copy of Microsoft Office, I will find you. You have my word."
+  - text: "What's orange and sounds like a parrot? A carrot."
+  - text: "I would point you to a political joke, but the problem is that they often get elected."
+  - text: "What's orange and sounds like a parrot? A carrot."
 
   utter_iamabot:
   - text: "I am indeed a bot."

@@ -46,24 +46,29 @@ class WeatherModule:
             return None
 
     # Query forecasts by day. day=0 is today, day=1 is tomorrow and so on.
-    def query_day_forecast(self, day, city, units='metric'):
+    def query_day_forecast(self, days, city, units='metric', next_if_empty=True):
         data = self.query_weather_forecast(city, units)
         today = datetime.now().date()
-        day = today + timedelta(days=day)
+        target_day = today + timedelta(days=days)
+        next_day = target_day + timedelta(days=1)
 
         forecasts = []
         if data:
             for entry in data:
-                if datetime.fromisoformat(entry['dt_txt']).date() == day:
+                if datetime.fromisoformat(entry['dt_txt']).date() == target_day:
                     forecasts.append(entry)
+                elif datetime.fromisoformat(entry['dt_txt']).date() == next_day:
+                    # If next_if_empty is True and there is no data for the target day return data for the day after target day
+                    if not forecasts and next_if_empty:
+                        forecasts.append(entry)
 
             return forecasts
         else:
             return None
 
     # Returns simplified forecast
-    def get_simple_forecast(self, day=0, city='cambridge', units='metric'):
-        forecasts = self.query_day_forecast(day, city, units)
+    def get_simple_forecast(self, day=0, city='cambridge', units='metric', next_if_empty=True):
+        forecasts = self.query_day_forecast(day, city, units, next_if_empty)
 
         if not forecasts:
             return None
@@ -73,11 +78,17 @@ class WeatherModule:
         temp_low = min(temp)
 
         # Weather in order of priority. Notifies of most significant weather condition
-        weather_conditions = ['Extreme', 'Snow', 'Rain', 'Cloudy', 'Clear']
+        weather_conditions = {
+            'Extreme': 'Extreme',
+            'Snow': 'Snowy',
+            'Rain': 'Rainy',
+            'Clouds': 'Cloudy',
+            'Clear': 'Clear'
+            }
         
         weather = [forecast['weather'][0]['main'] for forecast in forecasts]
-        for condition in weather_conditions:
-            if condition in weather:
+        for condition_raw, condition in weather_conditions.items():
+            if condition_raw in weather:
                 weather = condition
                 break
 
@@ -128,5 +139,5 @@ class WeatherModule:
 if __name__ == "__main__":
     mod = WeatherModule()
     print(mod.check_city('cairo'))
-    print(mod.get_simple_forecast(city='cairo'))
+    print(mod.get_simple_forecast(city='cambridge'))
     print(mod.get_country_iso_2_from_city('london'))

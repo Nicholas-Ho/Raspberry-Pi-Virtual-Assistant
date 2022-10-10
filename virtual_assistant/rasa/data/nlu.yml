@@ -38,6 +38,7 @@ nlu:
     - of course
     - that sounds good
     - correct
+    - great!
 
 - intent: deny
   examples: |
@@ -108,6 +109,9 @@ nlu:
     - what's the temperature in [Lisbon](GPE)?
     - is it going to snow in [Cairo](GPE)?
     - tell me the weather
+    - how's the weather today?
+    - how's the weather like?
+    - is it going to rain later?
 
 - intent: ask_news
   examples: |
@@ -123,6 +127,8 @@ nlu:
     - tell me some [technology](news_category) news
     - give me [sports](news_category) news
     - what's going on in the [entertainment](news_category) industry?
+    - what's the news today?
+    - what's the story, morning glory?
 
 - lookup: news_category
   examples: |
@@ -166,6 +172,7 @@ nlu:
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
+    - are you human?
   
 - intent: testing
   examples: |

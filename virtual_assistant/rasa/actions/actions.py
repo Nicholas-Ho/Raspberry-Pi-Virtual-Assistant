@@ -83,7 +83,7 @@ class ActionGetWeather(Action):
 
         # Check if the user gave a city to check the weather. If not, default to 'residence' slot.
         city = next(tracker.get_latest_entity_values("city"), None)
-        if not city: city = tracker.get_slot("residence")
+        if not city: city = tracker.get_slot("residence_city")
         
         if not city:
             msg = "I'm not sure where you want to check the weather for. Maybe you could give me a place?"
@@ -98,10 +98,6 @@ class ActionGetWeather(Action):
             return []
         
         forecast = mod.get_simple_forecast(city=city)
-        if forecast['weather'] == 'Rain':
-            forecast['weather'] = 'Rainy'
-        elif forecast['weather'] == 'Snow':
-            forecast['weather'] = 'Snowy'
         
         msg = f"The weather in {city} is {forecast['weather'].lower()} today, with a temperature high of {forecast['temp_high']} and a low of {forecast['temp_low']} degrees Celsius."
         dispatcher.utter_message(text=msg)
