@@ -39,7 +39,7 @@ One should also have and successfully set-up one or more Philips Wiz lightbulbs 
 
 ### Spotify
 A Spotify Premium account and SDK app credentials (https://developer.spotify.com/dashboard/) are required. Follow the steps below:
-- Set up a Spotify developer app as shown in the *Set Up Your Account* section at https://developer.spotify.com/documentation/web-playback-sdk/guide/. Store the credentials in a file ``virtual_assistant/rasa/actions/spotify_module/node_web_player/.env` as the constants *SPOTIFY_CLIENT_ID* and *SPOTIFY_CLIENT_SECRET*.
+- Set up a Spotify developer app as shown in the *Set Up Your Account* section at https://developer.spotify.com/documentation/web-playback-sdk/guide/. Store the credentials in a file `virtual_assistant/rasa/actions/spotify_module/node_web_player/.env` as the constants *SPOTIFY_CLIENT_ID* and *SPOTIFY_CLIENT_SECRET*.
 - Encode your Spotify Premium account username and password using the simple Python script below. Store the credentials in a file `virtual_assistant/rasa/actions/spotify_module/python/secrets/keys.py` as the constants *SPOTIFY_USERNAME* and *SPOTIFY_PASSWORD*. In the same file, also store the Fernet key provided by the script as *FERNET_KEY*. (Note: **This is very insecure**, and is only designed to ensure that the credentials cannot be read at a glance. Restrict access to the keys and code, or edit the code to enter the credentials manually on setup)
 
 This is the suggested script for the encoding of the Spotify username and password:
