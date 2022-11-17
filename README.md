@@ -61,11 +61,11 @@ print('Password: ' + encrypter.encrypt(password.encode('utf-8')).decode('utf-8')
 ## Setup
 To start the virtual assitant after installation, set up the following shells in order:
 
-1. In `/virtual_assistant/rasa/actions/modules/spotify_module/node_web_player`, enter WSL (if on Windows), activate node.js via nvm then run 'node .' (see `spotify.py` for details)
-2. In `/virtual_assistant/rasa`, run the actions server using 'rasa run actions --port 5055'
-3. In `/virtual_assistant/rasa`, run the rasa server using 'rasa run -m models --endpoints endpoints.yml --port 5002 --credentials credentials.yml'
+1. In `virtual_assistant/rasa/actions/modules/spotify_module/node_web_player`, enter WSL (if on Windows), activate node.js via nvm then run 'node .' (see `spotify.py` for details)
+2. In `virtual_assistant/rasa`, run the actions server using 'rasa run actions --port 5055'
+3. In `virtual_assistant/rasa`, run the rasa server using 'rasa run -m models --endpoints endpoints.yml --port 5002 --credentials credentials.yml'
 
-Then run the `/virtual_assistant/virtual_assistant.py` script (in yet another shell).
+Then run the `virtual_assistant/virtual_assistant.py` script (in yet another shell).
 
 ## Kris...?
 The name 'Kris' was chosen because it is easily detected by the speech-to-text model and the text-to-speech model is female (and because it is a nice name). However, should a name change be required (or desired), change the list of *hotwords* in `virtual_assistant/virtual_assistant.py`. To change the voice, edit `virtual_assistant/tts_module/tts_module.py`. A new model might need to be installed. To do so, reference https://github.com/coqui-ai/TTS.
