@@ -14,10 +14,24 @@ from rasa_sdk.events import SlotSet
 from .modules.weather_module.weather import WeatherModule
 from .modules.news_module.news import NewsModule
 from .modules.spotify_module.python.spotify import SpotifyModule
+from .modules.wizlight_module.wizlight import WizLightModule
+
+import asyncio
 # from .modules.utils import convert_iso_2_to_country
 
 # Initialise the Spotify Module
 spotify_module = SpotifyModule()
+
+# Initialise the Wizlight Module
+wizlight_ips = ["10.254.229.143"]
+wizlight_module = WizLightModule(wizlight_ips)
+
+# Set asynchronous event loop for Wizlight Module
+loop = asyncio.new_event_loop()
+asyncio.set_event_loop(loop)
+
+
+# Weather Module
 
 class ActionUtterResidence(Action):
 
@@ -104,6 +118,9 @@ class ActionGetWeather(Action):
         
         return []
 
+
+# News Module
+
 class ActionGetNews(Action):
 
     def name(self) -> Text:
@@ -136,6 +153,9 @@ class ActionGetNews(Action):
         dispatcher.utter_message(text=msg)
         
         return []
+
+
+# Spotify Module
 
 class ActionPlayMusic(Action):
 
@@ -190,5 +210,104 @@ class ActionPlaySong(Action):
         else:
             msg = "No song provided!"
         dispatcher.utter_message(text=msg)
+        
+        return []
+
+
+# Wizlight Module
+
+class ActionTurnLightOn(Action):
+
+    def name(self) -> Text:
+        return "action_turn_light_on"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        msg = "Turning light on."
+        dispatcher.utter_message(text=msg)
+
+        loop.run_until_complete(wizlight_module.turn_on())
+        
+        return []
+
+class ActionTurnLightOff(Action):
+
+    def name(self) -> Text:
+        return "action_turn_light_off"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        msg = "Turning light off."
+        dispatcher.utter_message(text=msg)
+
+        loop.run_until_complete(wizlight_module.turn_off())
+        
+        return []
+
+class ActionSetWarmLight(Action):
+
+    def name(self) -> Text:
+        return "action_set_warm_light"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        msg = "Setting light to warm."
+        dispatcher.utter_message(text=msg)
+
+        loop.run_until_complete(wizlight_module.set_warm_light())
+        
+        return []
+
+class ActionSetCoolLight(Action):
+
+    def name(self) -> Text:
+        return "action_set_cool_light"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        msg = "Setting light to cool."
+        dispatcher.utter_message(text=msg)
+
+        loop.run_until_complete(wizlight_module.set_cool_light())
+        
+        return []
+
+class ActionSetCozyLight(Action):
+
+    def name(self) -> Text:
+        return "action_set_cozy_light"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        msg = "Setting light scene to cozy."
+        dispatcher.utter_message(text=msg)
+
+        loop.run_until_complete(wizlight_module.set_scene("Cozy"))
+        
+        return []
+
+class ActionSetDaylight(Action):
+
+    def name(self) -> Text:
+        return "action_set_daylight"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        msg = "Setting light scene to daylight."
+        dispatcher.utter_message(text=msg)
+
+        loop.run_until_complete(wizlight_module.set_scene("Daylight"))
         
         return []

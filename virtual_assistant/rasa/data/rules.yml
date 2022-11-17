@@ -66,3 +66,33 @@ rules:
   steps:
   - intent: play_song
   - action: action_play_song
+
+- rule: Turn light on
+  steps:
+  - intent: turn_light_on
+  - action: action_turn_light_on
+
+- rule: Turn light off
+  steps:
+  - intent: turn_light_off
+  - action: action_turn_light_off
+
+- rule: Set warm light
+  steps:
+  - intent: set_warm_light
+  - action: action_set_warm_light
+
+- rule: Set cool light
+  steps:
+  - intent: set_cool_light
+  - action: action_set_cool_light
+
+- rule: Set cozy light
+  steps:
+  - intent: set_cozy_light
+  - action: action_set_cozy_light
+
+- rule: Set daylight
+  steps:
+  - intent: set_daylight
+  - action: action_set_daylight

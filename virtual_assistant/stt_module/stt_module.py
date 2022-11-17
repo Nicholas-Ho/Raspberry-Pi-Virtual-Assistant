@@ -23,7 +23,7 @@ class STTModule:
     def callback(self, indata, frames, time, status):
         """This is called (from a separate thread) for each audio block."""
         if status:
-            print(status, file=sys.stderr)
+            print("Sounddevice Status: ", status, file=sys.stderr)
         self.q.put(bytes(indata))
 
     def stt(self, rec, data):
@@ -152,5 +152,5 @@ class STTModule:
 # Testing
 if __name__ == '__main__':
     stt = STTModule()
-    stt.listen_hotword(['hello diana', 'hey diana'], True, False)
-    # stt.listen(10, True, False)
+    # stt.listen_hotword(['hello diana', 'hey diana'], True, False)
+    stt.listen(10, True, False)

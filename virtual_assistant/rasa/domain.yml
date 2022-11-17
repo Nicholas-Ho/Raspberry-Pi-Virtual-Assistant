@@ -15,6 +15,12 @@ intents:
   - play_music
   - pause_music
   - play_song
+  - turn_light_on
+  - turn_light_off
+  - set_warm_light
+  - set_cool_light
+  - set_cozy_light
+  - set_daylight
   - bot_challenge
   - testing
 
@@ -102,6 +108,12 @@ actions:
 - action_play_music
 - action_pause_music
 - action_play_song
+- action_turn_light_on
+- action_turn_light_off
+- action_set_warm_light
+- action_set_cool_light
+- action_set_cozy_light
+- action_set_daylight
 
 session_config:
   session_expiration_time: 60

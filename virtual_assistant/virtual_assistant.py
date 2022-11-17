@@ -13,8 +13,8 @@ from tts_module.tts_module import TTSModule
 
 class VirtualAssistant:
 
-	# Virtual assistant hotwords ('Hey google'?)
-	hotwords = ['hello diana', 'hey diana', 'hi diana']
+	# Virtual assistant hotwords ('Hey google'?). Say hello to Kris!
+	hotwords = ['hello chris', 'hey chris', 'hi chris', 'hello kris', 'hey kris', 'hi kris']
 
 	# Thank you phrases (to end listening session)
 	thank_you_phrases = ['thank you', 'thanks so much', 'thank you so much']

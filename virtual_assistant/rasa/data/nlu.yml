@@ -166,6 +166,47 @@ nlu:
     - can you pause the music please?
     - could you stop playing?
 
+- intent: turn_light_on
+  examples: |
+    - turn on the lights
+    - could you turn the lights on please?
+    - please turn the lights on
+    - let there be light!
+
+- intent: turn_light_off
+  examples: |
+    - turn off the lights
+    - could you turn the lights off please?
+    - please turn the lights off
+
+- intent: set_warm_light
+  examples: |
+    - turn on warm lights
+    - could you turn the warm lights on please?
+    - could you make the light warmer please?
+    - please make the light warmer
+
+- intent: set_cool_light
+  examples: |
+    - turn on cool lights
+    - could you turn the cool lights on please?
+    - could you make the light cooler please?
+    - please make the light cooler
+
+- intent: set_cozy_light
+  examples: |
+    - turn on cozy lights
+    - could you turn the cozy lights on please?
+    - could you make the light cozier please?
+    - please make the light cozier
+
+- intent: set_daylight
+  examples: |
+    - rise and shine
+    - turn on the day lights
+    - turn on the daylight
+    - could you turn the day lights on please?
+
 - intent: bot_challenge
   examples: |
     - are you a bot?
