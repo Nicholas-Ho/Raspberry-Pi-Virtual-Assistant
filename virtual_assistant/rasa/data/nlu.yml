@@ -79,6 +79,9 @@ nlu:
     - joke?
     - humor me
     - humour me
+    - make me laugh
+    - tell me a funny joke
+    - tell me something funny
 
 - intent: inform_residence
   examples: |
@@ -185,6 +188,8 @@ nlu:
     - could you turn the warm lights on please?
     - could you make the light warmer please?
     - please make the light warmer
+    - set lights to warm
+    - set warm lights
 
 - intent: set_cool_light
   examples: |
@@ -192,6 +197,8 @@ nlu:
     - could you turn the cool lights on please?
     - could you make the light cooler please?
     - please make the light cooler
+    - set lights to cool
+    - set cool lights
 
 - intent: set_cozy_light
   examples: |
@@ -199,6 +206,8 @@ nlu:
     - could you turn the cozy lights on please?
     - could you make the light cozier please?
     - please make the light cozier
+    - set lights to cozy
+    - set cozy lights
 
 - intent: set_daylight
   examples: |
@@ -206,6 +215,8 @@ nlu:
     - turn on the day lights
     - turn on the daylight
     - could you turn the day lights on please?
+    - set lights to daylight
+    - set day lights
 
 - intent: bot_challenge
   examples: |

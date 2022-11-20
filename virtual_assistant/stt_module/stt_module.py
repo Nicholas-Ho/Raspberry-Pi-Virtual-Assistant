@@ -116,7 +116,6 @@ class STTModule:
                     # Recognises a hotword and waits for user to finish speaking
                     # Prints result afterwards
                     listen = False
-                    hotwords = ['hello diana', 'hey diana']
 
                     result = ''
                     

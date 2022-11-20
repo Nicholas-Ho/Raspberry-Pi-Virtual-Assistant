@@ -14,19 +14,6 @@ class WizLightModule:
             bulbs.append(wizlight(ip))
         self.lights = bulbs
 
-    async def sync_execute(self, f, **kwargs):
-        return await asyncio.gather(*[f(light, **kwargs) for light in self.lights])
-
-    async def set_warm_light(self):
-        async def _set_warm(light):
-            await light.turn_on(PilotBuilder(warm_white=255))
-        await self.sync_execute(_set_warm)
-
-    async def set_cool_light(self):
-        async def _set_cool(light):
-            await light.turn_on(PilotBuilder(cold_white=255))
-        await self.sync_execute(_set_cool)
-
     # Into rhythm mode
     async def turn_on(self):
         async def _turn_on(light):
@@ -37,6 +24,16 @@ class WizLightModule:
         async def _turn_off(light):
             await light.turn_off()
         await self.sync_execute(_turn_off)
+        
+    async def set_warm_light(self):
+        async def _set_warm(light):
+            await light.turn_on(PilotBuilder(warm_white=255))
+        await self.sync_execute(_set_warm)
+
+    async def set_cool_light(self):
+        async def _set_cool(light):
+            await light.turn_on(PilotBuilder(cold_white=255))
+        await self.sync_execute(_set_cool)
 
     async def set_scene(self, scene_name):
         async def _set_scene(light, scene_id):
@@ -46,6 +43,20 @@ class WizLightModule:
             await self.sync_execute(_set_scene, scene_id=scene_id)
         except Exception as e:
             print(e)
+            
+    
+
+    # Utility functions
+
+    # Rasa calls each action in a different loop, so the running loops of the bulbs must be updated
+    def _update_loops(self):
+        for light in self.lights:
+            light.loop = asyncio.get_running_loop()
+
+    # Gather the async tasks for synchronised execution (for multiple bulbs)
+    async def sync_execute(self, f, **kwargs):
+        self._update_loops()
+        return await asyncio.gather(*[f(light, **kwargs) for light in self.lights])
 
     async def test(self):
         async def _test(light):
@@ -62,15 +73,15 @@ class WizLightModule:
             await light.turn_on(PilotBuilder(cold_white=255))
         await self.sync_execute(_test)
 
-    async def get_states(self):
-        async def _get_state(light):
-            state = await light.updateState()
-            return state.get_rgb()
-        return await self.sync_execute(_get_state)
+    async def check_connection(self):
+        states = await self.get_states()
+        return len(states) > 0
+
 
 async def main():
     mod = WizLightModule()
     await mod.test()
+    await mod.set_scene('Cozy')
     states = await mod.get_states()
     print(states)
 
