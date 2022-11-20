@@ -3,7 +3,7 @@ A virtual assistant in the vein of Google Home or Amazon Alexa, designed to be u
 
 Simply say hello to Kris ('Hello, Kris!') and tell her what you would like to her to help you with ('What's the weather forecast for today?'). Kris will (hopefully) answer with the information you need, or perform the action requested ('Hi Kris, turn on the lights.'). Kris will continue listening to you until you say thanks ('Thank you!') or stop speaking for a while.
 
-This is a personal project and not intended for mass distribution. The virtual assistant is tailored to my requirements and technologies (for instance, a Philips Wiz lightbulb). However, it can easily be adapted to another's needs.
+This is a personal project and not intended for distribution. The virtual assistant is tailored to my requirements and technologies (for instance, a Philips Wiz lightbulb). However, it can easily be adapted to another's needs.
 
 ## Features
 The virtual assistant has the following capabilites:
