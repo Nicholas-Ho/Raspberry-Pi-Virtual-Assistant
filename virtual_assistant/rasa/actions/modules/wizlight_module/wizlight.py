@@ -58,34 +58,30 @@ class WizLightModule:
         self._update_loops()
         return await asyncio.gather(*[f(light, **kwargs) for light in self.lights])
 
-    async def test(self):
-        async def _test(light):
-            await light.turn_off()
-            sleep(1)
-            await light.turn_on(PilotBuilder(rgb=(200, 255, 200)))
-            sleep(2)
-            await light.turn_on(PilotBuilder(rgb=(200, 200, 255)))
-            sleep(2)
-            await light.turn_on(PilotBuilder(rgb=(255, 200, 200)))
-            sleep(2)
-            await light.turn_on(PilotBuilder(warm_white=255))
-            sleep(2)
-            await light.turn_on(PilotBuilder(cold_white=255))
-        await self.sync_execute(_test)
+    async def get_states(self):
+        async def _get_state(light):
+            state = await light.updateState()
+            return state
+        return await self.sync_execute(_get_state)
 
     async def check_connection(self):
         states = await self.get_states()
-        return len(states) > 0
+        connections = len(states)
+        if connections == 1:
+            print('1 Wizlight connected.')
+        elif connections > 1:
+            print(f'{connections} Wilights Connected.')
+        else:
+            raise Exception('No Wizlights connected. Check your list of Wizlight IP addresses.')
 
+
+# Testing
 
 async def main():
     mod = WizLightModule()
-    await mod.test()
     await mod.set_scene('Cozy')
     states = await mod.get_states()
     print(states)
-
-# Testing
 
 if __name__ == "__main__":
     loop = asyncio.new_event_loop()

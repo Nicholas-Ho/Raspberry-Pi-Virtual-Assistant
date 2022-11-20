@@ -16,6 +16,8 @@ from .modules.news_module.news import NewsModule
 from .modules.spotify_module.python.spotify import SpotifyModule
 from .modules.wizlight_module.wizlight import WizLightModule
 
+import asyncio
+
 # from .modules.utils import convert_iso_2_to_country
 
 # Initialise the Spotify Module
@@ -24,6 +26,13 @@ spotify_module = SpotifyModule()
 # Initialise the Wizlight Module
 wizlight_ips = ["10.254.229.143"]
 wizlight_module = WizLightModule(wizlight_ips)
+
+# Check connection of Wizlights
+try:
+    loop = asyncio.get_running_loop()
+except RuntimeError:
+    loop = asyncio.new_event_loop()
+    loop.run_until_complete(wizlight_module.check_connection())
 
 
 # Weather Module
