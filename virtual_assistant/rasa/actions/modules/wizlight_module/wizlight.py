@@ -4,7 +4,7 @@ from time import sleep
 
 # List of IP addresses of bulbs (get from WiZ app)
 # Manual as UDP discovery doesn't seem to work
-ips = ["10.254.229.143"]
+ips = ["10.247.63.188"]
 
 class WizLightModule:
 
@@ -18,22 +18,34 @@ class WizLightModule:
     async def turn_on(self):
         async def _turn_on(light):
             await light.turn_on(PilotBuilder())
-        await self.sync_execute(_turn_on)
+        try:
+            await self.sync_execute(_turn_on)
+        except Exception as e:
+            print(e)
 
     async def turn_off(self):
         async def _turn_off(light):
             await light.turn_off()
-        await self.sync_execute(_turn_off)
-        
+        try:
+            await self.sync_execute(_turn_off)
+        except Exception as e:
+            print(e)
+
     async def set_warm_light(self):
         async def _set_warm(light):
             await light.turn_on(PilotBuilder(warm_white=255))
-        await self.sync_execute(_set_warm)
+        try:
+            await self.sync_execute(_set_warm)
+        except Exception as e:
+            print(e)
 
     async def set_cool_light(self):
         async def _set_cool(light):
             await light.turn_on(PilotBuilder(cold_white=255))
-        await self.sync_execute(_set_cool)
+        try:
+            await self.sync_execute(_set_cool)
+        except Exception as e:
+            print(e)
 
     async def set_scene(self, scene_name):
         async def _set_scene(light, scene_id):
@@ -43,7 +55,6 @@ class WizLightModule:
             await self.sync_execute(_set_scene, scene_id=scene_id)
         except Exception as e:
             print(e)
-            
     
 
     # Utility functions
@@ -52,6 +63,7 @@ class WizLightModule:
     def _update_loops(self):
         for light in self.lights:
             light.loop = asyncio.get_running_loop()
+            light.transport = None # The Datagram endpoint will be attached to the wrong loop
 
     # Gather the async tasks for synchronised execution (for multiple bulbs)
     async def sync_execute(self, f, **kwargs):
@@ -70,7 +82,7 @@ class WizLightModule:
         if connections == 1:
             print('1 Wizlight connected.')
         elif connections > 1:
-            print(f'{connections} Wilights Connected.')
+            print(f'{connections} Wizlights Connected.')
         else:
             raise Exception('No Wizlights connected. Check your list of Wizlight IP addresses.')
 

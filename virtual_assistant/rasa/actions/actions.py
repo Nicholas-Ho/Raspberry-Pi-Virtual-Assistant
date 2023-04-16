@@ -24,7 +24,7 @@ import asyncio
 spotify_module = SpotifyModule()
 
 # Initialise the Wizlight Module
-wizlight_ips = ["10.254.229.143"]
+wizlight_ips = ["10.247.63.188"]
 wizlight_module = WizLightModule(wizlight_ips)
 
 # Check connection of Wizlights
